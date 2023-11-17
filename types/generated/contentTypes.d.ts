@@ -688,9 +688,24 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    title: Attribute.String;
-    icon: Attribute.Media;
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    icon: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -706,6 +721,12 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::category.category',
+      'oneToMany',
+      'api::category.category'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -720,13 +741,48 @@ export interface ApiDishDish extends Schema.CollectionType {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    price: Attribute.Decimal;
-    calories: Attribute.Decimal;
-    isFavourite: Attribute.Boolean;
-    image: Attribute.Media;
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    price: Attribute.Decimal &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    calories: Attribute.Decimal &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    isFavourite: Attribute.Boolean &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    image: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     categories: Attribute.Relation<
       'api::dish.dish',
       'oneToMany',
@@ -739,6 +795,12 @@ export interface ApiDishDish extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::dish.dish', 'oneToOne', 'admin::user'> &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::dish.dish',
+      'oneToMany',
+      'api::dish.dish'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -748,12 +810,23 @@ export interface ApiMenuMenu extends Schema.CollectionType {
     singularName: 'menu';
     pluralName: 'menus';
     displayName: 'Menu';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    title: Attribute.String;
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     dishes: Attribute.Relation<'api::menu.menu', 'oneToMany', 'api::dish.dish'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -762,6 +835,12 @@ export interface ApiMenuMenu extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::menu.menu', 'oneToOne', 'admin::user'> &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::menu.menu',
+      'oneToMany',
+      'api::menu.menu'
+    >;
+    locale: Attribute.String;
   };
 }
 
